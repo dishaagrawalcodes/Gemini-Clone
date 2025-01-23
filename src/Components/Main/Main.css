@@ -55,3 +55,10 @@
     right:10px;
     padding: 2px;
 }
+.main .card p{
+    color:#585858;
+    font-size: 17px;
+}
+.main .card:hover{
+    background-color: #dfe4ea;
+}
