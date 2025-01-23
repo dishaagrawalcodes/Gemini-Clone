@@ -20,15 +20,18 @@ const Main = () => {
                     <img src={assets.compass_icon} alt=""></img>
                 </div>
                 <div className="card">
-                    <p>Suggest beautiful places to see on an upcoming road trip</p>
+                    <p>Where can I see breathtaking sunrises or sunsets during my journey?
+                    </p>
                     <img src={assets.bulb_icon} alt=""></img>
                 </div>
                 <div className="card">
-                    <p>Suggest beautiful places to see on an upcoming road trip</p>
+                    <p>What are the best national or state parks to visit along the way?
+                    </p>
                     <img src={assets.message_icon} alt=""></img>
                 </div>
                 <div className="card">
-                    <p>Suggest beautiful places to see on an upcoming road trip</p>
+                    <p>Are there any scenic hiking trails or viewpoints near my route?
+                    </p>
                     <img src={assets.code_icon} alt=""></img>
                 </div>
                
