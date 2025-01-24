@@ -2,12 +2,16 @@ import { createContext } from "react";
 
 export const Context =createContext();
 const ContextProvider =(props)=>{
+    const onSent =async(prompt) =>{
+        await run(prompt)
+    }
+    onSent("what is react js")
     const contextValue={
 
     }
     return (
-        <ContextProvider value={contextValue}>
+        <Context.Provider value={contextValue}>
             {props.children}
-        </ContextProvider>    )
+        </Context.Provider>    )
 }
 export default ContextProvider
