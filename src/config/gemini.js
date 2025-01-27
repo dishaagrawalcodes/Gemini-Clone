@@ -1,8 +1,6 @@
-const dotenv = require('dotenv');
-dotenv.config(); // Load environment variables from .env file
 
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-const apiKey = process.env.API_KEY; // Access the API key securely
+import { GoogleGenerativeAI } from "@google/generative-ai"
+const apiKey = import.meta.env.VITE_API_KEY;// Access the API key securely
 
 const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({
@@ -24,7 +22,9 @@ async function run(prompt) {
   });
 
   const result = await chatSession.sendMessage(prompt);
-  console.log(result.response.text());
+  const response =result.response;
+  console.log(response.text());
+  return response.text();
 }
 
 export default run;
