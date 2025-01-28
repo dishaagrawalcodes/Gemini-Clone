@@ -4,7 +4,9 @@ export const Context =createContext();
 const ContextProvider =(props)=>{
     const [input,setInput] =useState("");
     const [recentPrompt,setRecentPrompt]=useState("");
-    const [prevPrompt,setPrevPrompt]=useState([]);
+    const [prevPrompt,setPrevPrompt]= useState(
+        JSON.parse(localStorage.getItem("prevPrompts")) || [] // Load from localStorage
+      );
     const [showResult,setShowResult]=useState(false);
     const [loading,setLoading]=useState(false);
     const [resultData,setResultData]=useState("");
@@ -14,13 +16,15 @@ const ContextProvider =(props)=>{
             prev+nextWord);
     },75*index)
     }
-    const onSent =async(prompt) =>{
-        setResultData("")
+    const onSent = async (prompt) => {
+        if (prompt.trim() === "") return; 
+          setInput(""); // Clear input field immediately
+        setResultData("");
         setLoading(true)
         setShowResult(true)
-        setRecentPrompt(input)
-        setPrevPrompt(prev=>[...prev,input])
-        const response = await run(input)
+        setRecentPrompt(prompt)
+       
+        const response = await run(prompt)
         let responseArray =response.split("**");
         let newResponse="";
         for(let i=0;i< responseArray.length;i++){
@@ -37,10 +41,27 @@ const ContextProvider =(props)=>{
             const nextWord =newResponseArray[i];
             delayPara(i,nextWord+" ")
         }
+        setPrevPrompt((prev) => {
+            const updatedPrompts = [
+              ...prev,
+              { prompt, response: newResponse2 }, // Store prompt and response
+            ];
+            localStorage.setItem("prevPrompts", JSON.stringify(updatedPrompts)); // Save to localStorage
+            return updatedPrompts;
+          });
         setLoading(false);
-        setInput("");
+        
     }
-
+    const handlePromptClick = (selectedPrompt) => {
+        setRecentPrompt(selectedPrompt.prompt);
+        setResultData(selectedPrompt.response);
+        setShowResult(true);
+      };
+    const clearPrompts = () => {
+        setPrevPrompt([]);
+        localStorage.removeItem("prevPrompts");
+      };
+      
     const contextValue={
         prevPrompt,
         setPrevPrompt,
@@ -51,6 +72,8 @@ const ContextProvider =(props)=>{
         loading,
         resultData,
         input,setInput,
+        clearPrompts,
+        handlePromptClick,
     }
     return (
         <Context.Provider value={contextValue}>
