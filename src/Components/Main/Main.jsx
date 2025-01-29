@@ -99,13 +99,13 @@ const Main = () => {
             />
             <div>
               <img src={assets.gallery_icon} alt="" />
-              <img src={assets.mic_icon} alt="" />
+            <img src={assets.mic_icon} alt="" />
               
-              <img
+            {input?<img
                 onClick={handleSendClick} // Use handleSendClick to reset input before sending
                 src={assets.send_icon}
                 alt=""
-              />
+              />:null}
             </div>
           </div>
           <p className="bottom-info">
