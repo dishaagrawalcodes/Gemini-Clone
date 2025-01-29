@@ -6,7 +6,7 @@ import { Context } from "../../context/Context";
 const Sidebar = ({ onSent }) => {
   console.log(onSent);
   const [extended, setExtended] = useState(false);
-  const { setInput, prevPrompt,clearSpecificPrompt, handleRecentPromptClick } = useContext(Context);
+  const { setInput, prevPrompt,clearSpecificPrompt, handleRecentPromptClick,newChat } = useContext(Context);
   return (
     <div className="sidebar">
       <div className="top">
@@ -16,7 +16,7 @@ const Sidebar = ({ onSent }) => {
           src={assets.menu_icon}
           alt=""
         />
-        <div className="new-chat">
+        <div onClick={()=>newChat()}className="new-chat">
           <img src={assets.plus_icon} alt="" />
           {extended ? <p>New Chat</p> : null}
         </div>
@@ -32,13 +32,15 @@ const Sidebar = ({ onSent }) => {
                   >
                     <img src={assets.message_icon} alt="message" />
                     
-                    <p>
-                      {item?.prompt
-                        ? `${item.prompt.slice(0, 18)}...`
-                        : "Unknown"}
-                         <button onClick={(e) => {
-                          e.stopPropagation();clearSpecificPrompt(item)}}>Clear</button>
-                    </p>
+                    <div className="recent-prompt">
+    <p>{item?.prompt ? `${item.prompt.slice(0, 18)}...` : "Unknown"}</p>
+    <button className="clear-button" onClick={(e) => {
+        e.stopPropagation();
+        clearSpecificPrompt(item);
+    }}>Clear</button>
+</div>
+
+                    
                   </div>
                 ))
               : null}
