@@ -16,6 +16,10 @@ const ContextProvider =(props)=>{
             prev+nextWord);
     },75*index)
     }
+    const newChat=()=>{
+      setLoading(false)
+      setShowResult(false)
+    }
     const onSent = async (prompt) => {
         if (prompt.trim() === "") return; 
           setInput(""); // Clear input field immediately
@@ -85,6 +89,7 @@ const ContextProvider =(props)=>{
         clearSpecificPrompt,
         handlePromptClick,
         handleRecentPromptClick,
+        newChat
     }
     return (
         <Context.Provider value={contextValue}>
