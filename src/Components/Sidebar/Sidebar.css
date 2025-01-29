@@ -31,7 +31,8 @@
     flex-direction: column;
     max-height: 400px;  /* Set a fixed height */
   overflow-y: auto;   /* Enable vertical scrolling */
-  scrollbar-width: none; 
+  scrollbar-width: none;
+  animation: fadeIn 1.5s;
 }
 .sidebar .recent::-webkit-scrollbar {
     width: 6px;
@@ -47,14 +48,15 @@
     align-items:start;
     gap:10px;
     padding:10px;
-    padding-right: 40px;
+    padding-right: 10px;
     border-radius: 50px;
     color:#282828; 
     cursor:pointer;
-}
-.sidebar .recent-entry{
     background-color:#e2e6eb;
+    width: 100%; 
 }
+
+
 .sidebar .bottom{
     display: flex;
     flex-direction: column;
@@ -66,3 +68,42 @@
       gap:10px;
       margin-bottom:20px;
 }
+ .sidebar .clear-button {
+    background-color: #ebcecb; /* Red background for danger */
+    color: white;              /* White text color */
+    border: none;     
+    /* Adds a gap between the text and the button */
+    /* Remove default border */
+    padding: 8px 16px;         /* Padding for better size */
+    font-size: 14px;  
+    cursor: pointer;          /* Pointer cursor for interactivity */
+    border-radius: 4px;        /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth transition */
+    margin-left: auto;
+  }
+  
+ .sidebar .clear-button:hover {
+    background-color: #c0392b; /* Darker red on hover */
+    transform: scale(1.05);     /* Slight scaling effect for interaction */
+  }
+  
+  .sidebar .clear-button:focus {
+    outline: none;              /* Remove default outline on focus */
+    box-shadow: 0 0 0 2px #3498db; /* Blue outline on focus */
+  }
+  .sidebar .recent-prompt {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%; /* Vertically center the content */
+  }
+  
+  .sidebar .clear-button {
+    margin-left: auto; /* This will push the button to the right */
+  }
+  @media (max-width:600px){
+    .sidebar{
+        display: none;
+    }
+  }
