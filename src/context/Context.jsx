@@ -43,8 +43,8 @@ const ContextProvider =(props)=>{
         }
         setPrevPrompt((prev) => {
             const updatedPrompts = [
-              ...prev,
               { prompt, response: newResponse2 }, // Store prompt and response
+              ...prev,
             ];
             localStorage.setItem("prevPrompts", JSON.stringify(updatedPrompts)); // Save to localStorage
             return updatedPrompts;
@@ -57,9 +57,19 @@ const ContextProvider =(props)=>{
         setResultData(selectedPrompt.response);
         setShowResult(true);
       };
-    const clearPrompts = () => {
-        setPrevPrompt([]);
-        localStorage.removeItem("prevPrompts");
+      const handleRecentPromptClick = (prompt) => {
+        setInput(prompt); // Optional, if you want to show it in the input field
+        onSent(prompt);  // Send the clicked prompt again
+      };
+      const clearSpecificPrompt = (selectedPrompt) => {
+        console.log("Clearing prompt:", selectedPrompt);
+        setPrevPrompt((prev) => {
+          const updatedPrompts = prev.filter(
+            (prompt) => prompt.prompt !== selectedPrompt.prompt
+          );
+          localStorage.setItem("prevPrompts", JSON.stringify(updatedPrompts)); // Update localStorage
+          return updatedPrompts;
+        });
       };
       
     const contextValue={
@@ -72,8 +82,9 @@ const ContextProvider =(props)=>{
         loading,
         resultData,
         input,setInput,
-        clearPrompts,
+        clearSpecificPrompt,
         handlePromptClick,
+        handleRecentPromptClick,
     }
     return (
         <Context.Provider value={contextValue}>
