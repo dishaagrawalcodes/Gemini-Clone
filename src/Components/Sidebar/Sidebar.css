@@ -29,7 +29,15 @@
 .sidebar .recent{
     display: flex;
     flex-direction: column;
+    max-height: 400px;  /* Set a fixed height */
+  overflow-y: auto;   /* Enable vertical scrolling */
+  scrollbar-width: none; 
 }
+.sidebar .recent::-webkit-scrollbar {
+    width: 6px;
+    display: none;
+  }
+  
 .sidebar .recent-title{
     margin-top: 30px;
     margin-bottom: 20px;
