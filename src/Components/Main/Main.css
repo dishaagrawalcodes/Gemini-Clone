@@ -78,6 +78,7 @@
     background-color: #f0f4f9;
     padding: 10px 20px;
     border-radius: 50px;
+    margin-top: 10px;
 }
 .search-box img{
     width:24px;
@@ -152,5 +153,21 @@ display: none;
  font-size: 17px;
  font-weight: 300;
  line-height: 1.8;
+}
+@media(max-width:600px){
+    .main-bottom input{
+        flex: none;
+        width:150px;
+    }
+    .main-bottom img{
+        width:20px;
+    }
+    .search-box{
+        padding: 5px 10px;
+      margin-top: 10px;
+    }
+    .search-box div{
+        gap:5px;
+    }
 }
 
