@@ -12,14 +12,18 @@ const Main = () => {
     setInput,
     input,
   } = useContext(Context);
-  const handleSendClick = () => {
-  
-    if (input.trim() !== "") { // Ensure non-empty input is sent
-      onSent(input); // Send the prompt
-      setInput(""); // Clear the input box immediately
+  const handleSendClick = (prompt =input) => {
+    const finalPrompt = typeof prompt === "string" ? prompt : input; // Ensure it's a string
+    if (typeof finalPrompt === "string" && finalPrompt.trim() !== "") { 
+      onSent(finalPrompt);
+      setInput("");
     }
   };
   
+  const handleRecentPromptClick = (prompt) => {
+    setInput(prompt);  // Set the clicked prompt as input (optional, if you want to show in input field)
+    handleSendClick(prompt);  // Send the clicked prompt
+  };
 
   return (
     <div className="main">
